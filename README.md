@@ -1,6 +1,14 @@
 # Battleship
 Proyecto desarrollado por los alumnos de Data Science de The Bridge 2023_
 -Cada un solo va a trabajar en su rama sin hacer push a develop hasta que hablemos
+
+-Constantes (las vamos a llamar todos igual para que sea más fácil integrarlo):
+    -tamaño del tablero: TAM_TABLERO     -> se define como un único número: por ejemplo TAM_TABLERO=10
+    -tamaño de los barcos: TAM_BARCOS    ->se define como una LISTA de los tamaños: 
+                                            p.e. TAM_BARCOS=[1,1,1,1,2,2,2,3,3,4]
+                                            ojo!: el número de barcos es el len(TAM_BARCOS)
+
+
 -Los archivos que vamos a entregar al final son:
     -1) README.mkd
         con todo explicado como lo hemos hecho, instrucciones, clases, funciones...
