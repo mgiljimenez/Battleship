@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 # Battleship
 Proyecto desarrollado por los alumnos de Data Science de The Bridge 2023_
 -Cada un solo va a trabajar en su rama sin hacer push a develop hasta que hablemos
@@ -70,3 +72,4 @@ LO SIGUIENTE ES UN BUCLE WHILE(1):
 ESTO NO ESTÁ DENTO DEL BUCLE 1:
 
 12) Finalizar juego haciendo un print
+>>>>>>> feature-Alba
