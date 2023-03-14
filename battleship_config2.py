@@ -1,3 +1,6 @@
+import pandas as pd
+import numpy as np
+import random
 class tablero:
 
     def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
@@ -28,12 +31,3 @@ class tablero:
                     colocado = True
         return tablero_input
     
-#Variables generales del juego:
-TAM_TABLERO = 10 # Tamaño del tablero
-TAM_BARCOS=[1,1,1,1,2,2,2,3,3,4]  #se define como una lista de los tamaños/ el número de barcos es el len(TAM_BARCOS)
-barco_icon = {1: "🚣", 2: "🚢", 3: "🛳️", 4: "🚤"}
-agua_icon= "🌊"
-shoot_icon="💥"
-
-#Definimos las clases:
-    #Creamos la clase tablero
