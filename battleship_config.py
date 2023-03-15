@@ -28,7 +28,6 @@ class tablero:
                         tablero_input[fila, col] = self.barco_icon[tam_barco]
                     colocado = True
         return tablero_input
-    
 
 #Variables generales del juego:
 TAM_TABLERO = 10 # Tamaño del tablero
