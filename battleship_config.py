@@ -7,30 +7,33 @@ class usuario:
         self.TAM_BARCOS = TAM_BARCOS
         self.TAM_TABLERO = TAM_TABLERO
         self.barco_icon = barco_icon
-    def generar_tablero(self):
-        tablero_input=np.full((TAM_TABLERO, TAM_TABLERO), " ")
-        barcos = []
-        for tam_barco in self.TAM_BARCOS:
-            colocado = False
-            while not colocado:
-                import numpy
-                fila, col = numpy.random.randint(self.TAM_TABLERO), numpy.random.randint(self.TAM_TABLERO)
-                direccion = numpy.random.choice(['arriba', 'abajo', 'izquierda', 'derecha'])
-                if direccion == 'arriba':
-                    posiciones = [(fila-i, col) for i in range(tam_barco)]
-                elif direccion == 'abajo':
-                    posiciones = [(fila+i, col) for i in range(tam_barco)]
-                elif direccion == 'izquierda':
-                    posiciones = [(fila, col-i) for i in range(tam_barco)]
-                else:
-                    posiciones = [(fila, col+i) for i in range(tam_barco)]
-                if all(0<=fila<self.TAM_TABLERO and 0<=col<self.TAM_TABLERO and tablero_input[fila, col]==" " for fila, col in posiciones):
-                    barco = {"tam": tam_barco, "posiciones": posiciones}
-                    barcos.append(barco)
-                    for fila, col in posiciones:
-                        tablero_input[fila, col] = self.barco_icon[tam_barco]
-                    colocado = True
-        return tablero_input
+    def generar_tablero(self, tipo):
+        if tipo=="jugador":
+            tablero_input=np.full((TAM_TABLERO, TAM_TABLERO), " ")
+            barcos = []
+            for tam_barco in self.TAM_BARCOS:
+                colocado = False
+                while not colocado:
+                    import numpy
+                    fila, col = numpy.random.randint(self.TAM_TABLERO), numpy.random.randint(self.TAM_TABLERO)
+                    direccion = numpy.random.choice(['arriba', 'abajo', 'izquierda', 'derecha'])
+                    if direccion == 'arriba':
+                        posiciones = [(fila-i, col) for i in range(tam_barco)]
+                    elif direccion == 'abajo':
+                        posiciones = [(fila+i, col) for i in range(tam_barco)]
+                    elif direccion == 'izquierda':
+                        posiciones = [(fila, col-i) for i in range(tam_barco)]
+                    else:
+                        posiciones = [(fila, col+i) for i in range(tam_barco)]
+                    if all(0<=fila<self.TAM_TABLERO and 0<=col<self.TAM_TABLERO and tablero_input[fila, col]==" " for fila, col in posiciones):
+                        barco = {"tam": tam_barco, "posiciones": posiciones}
+                        barcos.append(barco)
+                        for fila, col in posiciones:
+                            tablero_input[fila, col] = self.barco_icon[tam_barco]
+                        colocado = True
+            return tablero_input
+        else:
+            return np.full((TAM_TABLERO, TAM_TABLERO), " ")
 
     def disparar(self,tablero_maquina, tablero_interactivo):
         while True:
@@ -63,16 +66,6 @@ class usuario:
                 print(tablero_interactivo)
                 return("barco")
 
-    def comprobar_final(self, tablero_maquina):
-        hay_barcos = False
-        for fila in tablero_maquina:
-            for elemento in fila:
-                if (elemento !=" ") or (elemento !=shoot_icon) or(elemento !=agua_icon):
-                    hay_barcos = True
-        if hay_barcos==True:
-            return(True)
-        else:
-            return(False)
 
 class maquina:
     def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
@@ -106,7 +99,7 @@ class maquina:
             return tablero_input
         else:
             return np.full((TAM_TABLERO, TAM_TABLERO), " ")
-    def disparar(self, tablero_del_jugador):
+    def disparar(self, tablero_del_jugador, tablero_del_jugador_comprobar):
         while True:
             fila=random.randint(0, 9) 
             columna=random.randint(0, 9)
@@ -122,23 +115,13 @@ class maquina:
                 #Si dispara donde hay un espacio " " cambialo por el símbolo de agua y sal del bucle
                 print("La máquina ha disparado en agua")
                 tablero_del_jugador[fila][columna]=agua_icon
+                tablero_del_jugador_comprobar[fila][columna]=agua_icon
                 print(tablero_del_jugador)
                 return("pierde_turno")
             else:
                 #Si dispara donde hay un barco cambia al icono del fuego y comprueba si siguen quedando más barcos en el tablero
                 print("La máquina ha disparado en un barco")
                 tablero_del_jugador[fila][columna]=shoot_icon
+                tablero_del_jugador_comprobar[fila][columna]=shoot_icon
                 print(tablero_del_jugador)
                 return("barco")
- 
-  
-    def comprobar_final(self, tablero_del_jugador):
-        hay_barcos = False
-        for fila in tablero_del_jugador:
-            for elemento in fila:
-                if (elemento !=" ") or (elemento !=shoot_icon) or(elemento !=agua_icon):
-                    hay_barcos = True
-        if hay_barcos==True:
-            return(True)
-        else:
-            return(False)
