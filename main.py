@@ -1,9 +1,11 @@
 import numpy as np
 import pandas as pd
 import random
+from IPython.display import display
 from time import sleep
 from battleship_config import usuario, maquina
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
+
 
 
 #Inicializamos a los dos jugadores
@@ -22,11 +24,14 @@ nombre_jugador=input("Bienvenido a Battleship. ¿Cuál es su nombre?:")
 print(f"Bienvenido {nombre_jugador}!! A continuación te dejo las intrucciones. Mucha suerte!")
 print(instrucciones)
 
+
+
 #Comieza el juego (Explicar bien)
 print("Tu tablero:")
 print(tablero_del_jugador)
 print("Tablero de la máquina")
 print(tablero_interactivo)
+
 
 while True:
     while True:

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import random
+from IPython.display import display
 from battleship_variables import TAM_TABLERO, TAM_BARCOS, barco_icon, agua_icon, shoot_icon
 class usuario:
     def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
@@ -125,3 +126,4 @@ class maquina:
                 tablero_del_jugador_comprobar[fila][columna]=shoot_icon
                 print(tablero_del_jugador)
                 return("barco")
+             
