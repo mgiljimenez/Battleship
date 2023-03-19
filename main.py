@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import random
-from IPython.display import display
 from time import sleep
 from battleship_config import usuario, maquina
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
