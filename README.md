@@ -1,4 +1,4 @@
-# HUNDIR LA FLOTA - JUEGO :collision::boat:
+# HUNDIR LA FLOTA - JUEGO 💥🚢
 
 ## Explicación del juego
 En este clásico juego de estrategia naval, tendrás la oportunidad de poner a prueba tus habilidades para hundir los barcos de tu oponente mientras proteges los tuyos. 
@@ -92,3 +92,9 @@ Si el resultado del disparo de la máquina es "vuelve_tocar", significa que ha i
 Si el resultado del disparo de la máquina es "barco", significa que ha impactado en una posición con un barco enemigo. Se verifica si la máquina ha ganado el juego (es decir, si todos los barcos del jugador han sido destruidos), comparando 'tablero_del_jugador' con 'tablero_del_jugador_comprobar'. Si se han destruido todos los barcos del jugador, el bucle se termina con un break.
 Si la máquina no ha ganado el juego y ha impactado en un barco, se imprime un mensaje de que la máquina volverá a tirar y se continúa con el bucle.
 Si el bucle termina por completo, significa que la máquina ha ganado el juego y se establece el ganador como "maquina".
+
+
+## Capturas de ejemplo del programa
+![Imagen0](/img/imagen0.png)
+
+![Imagen1](/img/imagen1.png)
