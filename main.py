@@ -3,8 +3,9 @@ import pandas as pd
 import random
 from time import sleep
 from battleship_config import usuario, maquina, mostrar_tablero
-from IPython.display import display
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
+from tabulate import tabulate
+
 
 
 #Inicializamos a los dos jugadores
@@ -25,11 +26,10 @@ print(f"""======================================================================
 print(instrucciones)
 tablero_mostrar=mostrar_tablero()
 
+sleep(5)
 
-#Comieza el juego (Explicar bien)
 print("Tu tablero:")
 tablero_mostrar.mostrar(tablero_del_jugador)
-# tablero_mostrar.mostrar(tablero_del_jugador)
 print("Tablero de la máquina")
 tablero_mostrar.mostrar(tablero_interactivo)
 
