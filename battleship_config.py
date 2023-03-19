@@ -1,7 +1,24 @@
 import numpy as np
 import pandas as pd
 import random
+from IPython.display import display
 from battleship_variables import TAM_TABLERO, TAM_BARCOS, barco_icon, agua_icon, shoot_icon
+class mostrar_tablero:
+    def __init__(self):
+        pass
+        
+    def mostrar(self, tablero):
+        self.tablero=tablero
+        tablero_df=pd.DataFrame(tablero)
+        tablero_bonito= tablero_df.style.apply(lambda x: ["background: yellow" if v == shoot_icon
+                             else "background: white" if v == " "
+                             else "background: lightblue" if v == agua_icon
+                             else "background: gray" if v in barco_icon.values()
+                             else "" for v in x], axis = 1)
+        return tablero_bonito
+        
+tablero_mostrar=mostrar_tablero()
+
 class usuario:
     def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
         self.TAM_BARCOS = TAM_BARCOS
@@ -56,14 +73,14 @@ class usuario:
                 print("¡Has disparado al agua!")
                 tablero_maquina[fila][col] = agua_icon
                 tablero_interactivo[fila][col] = agua_icon
-                print(tablero_maquina)
-                print(tablero_interactivo)
+                tablero_mostrar.mostrar(tablero_maquina)
+                tablero_mostrar.mostrar(tablero_interactivo)
                 return("pierde_turno")
             else:
                 tablero_maquina[fila][col] = shoot_icon
                 tablero_interactivo[fila][col] = shoot_icon
                 print("¡Has disparado en un barco!")
-                print(tablero_interactivo)
+                tablero_mostrar.mostrar(tablero_interactivo)
                 return("barco")
 
 
@@ -116,12 +133,14 @@ class maquina:
                 print("La máquina ha disparado en agua")
                 tablero_del_jugador[fila][columna]=agua_icon
                 tablero_del_jugador_comprobar[fila][columna]=agua_icon
-                print(tablero_del_jugador)
+                tablero_mostrar.mostrar(tablero_del_jugador)
                 return("pierde_turno")
             else:
                 #Si dispara donde hay un barco cambia al icono del fuego y comprueba si siguen quedando más barcos en el tablero
                 print("La máquina ha disparado en un barco")
                 tablero_del_jugador[fila][columna]=shoot_icon
                 tablero_del_jugador_comprobar[fila][columna]=shoot_icon
-                print(tablero_del_jugador)
+                tablero_mostrar.mostrar(tablero_del_jugador)
                 return("barco")
+            
+

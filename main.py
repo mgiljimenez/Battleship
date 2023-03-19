@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 import random
 from time import sleep
-from battleship_config import usuario, maquina
+from battleship_config import usuario, maquina, mostrar_tablero
+from IPython.display import display
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
 
 
@@ -19,14 +20,18 @@ tablero_interactivo=jugador_maquina.generar_tablero("interactivo")
 
 #Iniciamos el juego preguntando al usuario su nombre y mostrando las instrucciones
 nombre_jugador=input("𝓑𝓲𝓮𝓷𝓿𝓮𝓷𝓲𝓭𝓸 𝓪 𝓗𝓾𝓷𝓭𝓲𝓻 𝓛𝓪 𝓕𝓵𝓸𝓽𝓪 ¿Cuál es su nombre?:")
-print(f"Bienvenido {nombre_jugador}!! A continuación te dejo las intrucciones. Mucha suerte!")
+print(f"""======================================================================================================================================
+{nombre_jugador}, bienvenido al juego de Hundir la Flota!!""")
 print(instrucciones)
+tablero_mostrar=mostrar_tablero()
+
 
 #Comieza el juego (Explicar bien)
 print("Tu tablero:")
-print(tablero_del_jugador)
+tablero_mostrar.mostrar(tablero_del_jugador)
+# tablero_mostrar.mostrar(tablero_del_jugador)
 print("Tablero de la máquina")
-print(tablero_interactivo)
+tablero_mostrar.mostrar(tablero_interactivo)
 
 while True:
     while True:
