@@ -18,7 +18,7 @@ tablero_interactivo=jugador_maquina.generar_tablero("interactivo")
 
 
 #Iniciamos el juego preguntando al usuario su nombre y mostrando las instrucciones
-nombre_jugador=input("Bienvenido a Battleship. ¿Cuál es su nombre?:")
+nombre_jugador=input("𝓑𝓲𝓮𝓷𝓿𝓮𝓷𝓲𝓭𝓸 𝓪 𝓗𝓾𝓷𝓭𝓲𝓻 𝓛𝓪 𝓕𝓵𝓸𝓽𝓪 ¿Cuál es su nombre?:")
 print(f"Bienvenido {nombre_jugador}!! A continuación te dejo las intrucciones. Mucha suerte!")
 print(instrucciones)
 
