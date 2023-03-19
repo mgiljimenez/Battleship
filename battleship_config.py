@@ -1,13 +1,43 @@
 import numpy as np
 import pandas as pd
 import random
+from IPython.display import display
 from battleship_variables import TAM_TABLERO, TAM_BARCOS, barco_icon, agua_icon, shoot_icon
+from tabulate import tabulate
+
+class mostrar_tablero:
+    '''
+    La clase mostrar_tablero se encarga del formato del tablero que se imprime por pantalla, de modo que no sea un simple dataframe.
+        -Recibe: tablero
+        -Output: Print del tablero con su estilo
+    '''
+    def __init__(self):
+        pass
+    def mostrar(self, tablero):
+        print(tabulate(tablero, headers="keys",showindex="always", tablefmt='fancy_grid'))
+        print("======================================================================================================================================")
+tablero_mostrar = mostrar_tablero()
+
+
 class usuario:
+    '''
+    Se encarga de realizar todas las acciones relacionadas con el jugador.
+    Inicializarlo, generar los tableros y disparar
+    '''
     def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
+        '''
+        Inicializa el jugador.
+            -Recibe: tamaño de los barcos, tamaño del tablero, icono de barcos
+        '''
         self.TAM_BARCOS = TAM_BARCOS
         self.TAM_TABLERO = TAM_TABLERO
         self.barco_icon = barco_icon
     def generar_tablero(self, tipo):
+        '''
+        Genera dos tableros. Uno con los barcos y otro en blanco. Ambos se irán actualizando de igual forma.
+        Así se comparan siempre ambos tableros y cuando sean iguales significará que ha finalizado el juego
+            -Recibe: tipo de tablero a generar ("jugador","blanco")
+        '''
         if tipo=="jugador":
             tablero_input=np.full((TAM_TABLERO, TAM_TABLERO), " ")
             barcos = []
@@ -36,6 +66,10 @@ class usuario:
             return np.full((TAM_TABLERO, TAM_TABLERO), " ")
 
     def disparar(self,tablero_maquina, tablero_interactivo):
+        """
+        Encargado de ejecutar los disparos que realiza el jugador al tablero de la máquina.
+            -Recibe: tablero de la máquina y tablero de la máquina en blanco.
+        """
         while True:
             try:
                 fila = int(input("Ingrese la fila (número entre 0 y {}): ".format(TAM_TABLERO-1)))
@@ -50,29 +84,46 @@ class usuario:
                 continue
             coordenada_disparo = tablero_maquina[fila][col]
             if (coordenada_disparo==agua_icon) or (coordenada_disparo==shoot_icon):
+                #Si dispara donde ya se había disparado antes vuelve a repetir el bucle
                 print("Ya has disparado aquí. Vuelve a tirar")
                 return("vuelve_tocar")
             elif coordenada_disparo == " ":
+                #Si dispara donde no había barco, se pierde turno y se muestra el símbolo de agua
                 print("¡Has disparado al agua!")
                 tablero_maquina[fila][col] = agua_icon
                 tablero_interactivo[fila][col] = agua_icon
-                print(tablero_maquina)
-                print(tablero_interactivo)
+                print("ＴΛＢＬΞＲＯ ＤΞ ＬΛ ＭÁＱＵＩＮΛ：")
+                tablero_mostrar.mostrar(tablero_interactivo)
                 return("pierde_turno")
             else:
+                #Si dispara donde había un barco, vuelve a ser su turno, se cambia por el símbolo del disparo y se comprueba si ha finalizado la partida
                 tablero_maquina[fila][col] = shoot_icon
                 tablero_interactivo[fila][col] = shoot_icon
                 print("¡Has disparado en un barco!")
-                print(tablero_interactivo)
+                print("ＴΛＢＬΞＲＯ ＤΞ ＬΛ ＭÁＱＵＩＮΛ：")
+                tablero_mostrar.mostrar(tablero_interactivo)
                 return("barco")
 
 
 class maquina:
+    '''
+    Se encarga de realizar todas las acciones relacionadas con el jugador máquina.
+    Inicializarlo, generar los tableros y disparar
+    '''
     def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
+        '''
+        Inicializa la máquina.
+            -Recibe: tamaño de los barcos, tamaño del tablero, icono de barcos
+        '''
         self.TAM_BARCOS = TAM_BARCOS
         self.TAM_TABLERO = TAM_TABLERO
         self.barco_icon = barco_icon
     def generar_tablero(self, tipo):
+        '''
+        Genera dos tableros. Uno con los barcos y otro en blanco. Ambos se irán actualizando de igual forma.
+        Así se comparan siempre ambos tableros y cuando sean iguales significará que ha finalizado el juego
+            -Recibe: tipo de tablero a generar ("maquina","blanco")
+        '''
         if tipo=="maquina":
             tablero_input=np.full((TAM_TABLERO, TAM_TABLERO), " ")
             barcos = []
@@ -100,13 +151,15 @@ class maquina:
         else:
             return np.full((TAM_TABLERO, TAM_TABLERO), " ")
     def disparar(self, tablero_del_jugador, tablero_del_jugador_comprobar):
+        """
+        Encargado de ejecutar los disparos que realiza la máquina al tablero del jugador.
+        Se elegirán las coordenadas de disparo de forma aleatoria.
+            -Recibe: tablero de la máquina y tablero de la máquina en blanco.
+        """
         while True:
             fila=random.randint(0, 9) 
             columna=random.randint(0, 9)
             coordenada_disparo=tablero_del_jugador[fila][columna]
-            #Defino la variable "terminar": tiene como objeto que si cambia a True significa que ha derrivado todos los objetivos
-            #Por lo que puede finalizar el juego
-            terminar=False
             if (coordenada_disparo==agua_icon) or (coordenada_disparo==shoot_icon):
                 #Si dispara donde ya había disparado antes vuele a ejecutar el bucle
                 return("vuelve_tocar")
@@ -116,12 +169,16 @@ class maquina:
                 print("La máquina ha disparado en agua")
                 tablero_del_jugador[fila][columna]=agua_icon
                 tablero_del_jugador_comprobar[fila][columna]=agua_icon
-                print(tablero_del_jugador)
+                print("ＴＵ Ｔ▲ＢＬＥＲＯ：")
+                tablero_mostrar.mostrar(tablero_del_jugador)
                 return("pierde_turno")
             else:
                 #Si dispara donde hay un barco cambia al icono del fuego y comprueba si siguen quedando más barcos en el tablero
                 print("La máquina ha disparado en un barco")
                 tablero_del_jugador[fila][columna]=shoot_icon
                 tablero_del_jugador_comprobar[fila][columna]=shoot_icon
-                print(tablero_del_jugador)
+                print("ＴＵ Ｔ▲ＢＬＥＲＯ：")
+                tablero_mostrar.mostrar(tablero_del_jugador)
                 return("barco")
+            
+
