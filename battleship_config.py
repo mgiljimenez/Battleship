@@ -3,8 +3,8 @@ import pandas as pd
 import random
 from IPython.display import display
 from battleship_variables import TAM_TABLERO, TAM_BARCOS, barco_icon, agua_icon, shoot_icon
-class usuario:
-    def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon):
+class usuario: # 3 atributos y 3 métodos
+    def __init__(self, TAM_BARCOS, TAM_TABLERO, barco_icon): #constructor
         self.TAM_BARCOS = TAM_BARCOS
         self.TAM_TABLERO = TAM_TABLERO
         self.barco_icon = barco_icon
