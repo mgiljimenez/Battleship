@@ -1,6 +1,9 @@
 from time import sleep
 from battleship_config import usuario, maquina, mostrar_tablero
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
+from playsound import playsound
+
+
 
 
 
@@ -36,6 +39,8 @@ while True:
         turno_jugador=jugador_usuario.disparar(tablero_maquina,tablero_interactivo)
         if turno_jugador=="pierde_turno":
             #Si ha disparado en agua pierde el turno y toca al oponente
+            with open ("img/agua.wav"):
+                playsound("img/agua.wav")
             break
         elif turno_jugador=="vuelve_tocar":
             #Si dispara donde ya había disparado antes, se vuelve arriba del bucle, no se considera jugada válida
@@ -45,6 +50,7 @@ while True:
             if (tablero_maquina==tablero_interactivo).all():
                 break
             else:
+                #Aquí iría audio de disparo
                 print("Vuelve a ser tu turno:")
                 continue
     if (tablero_maquina==tablero_interactivo).all():
@@ -57,6 +63,8 @@ while True:
         turno_maquina=disparo_de_maquina=jugador_maquina.disparar(tablero_del_jugador, tablero_del_jugador_comprobar)
         if turno_maquina=="pierde_turno":
             #Si ha disparado en agua pierde el turno y toca al oponente
+            with open ("img/agua.wav"):
+                playsound("img/agua.wav")
             break
         elif turno_maquina=="vuelve_tocar":
             #Si dispara donde ya había disparado antes, se vuelve arriba del bucle, no se considera jugada válida
@@ -66,6 +74,7 @@ while True:
             if (tablero_del_jugador==tablero_del_jugador_comprobar).all():
                 break
             else:
+                #Aquí iría audio de disparo
                 print("La máquina vuelve a tirar:")
                 continue
     if (tablero_del_jugador==tablero_del_jugador_comprobar).all():
@@ -74,7 +83,9 @@ while True:
 #Finalizamos el juego mostrando por pantalla quien ha sido el ganador
 if ganador=="jugador":
     print(f"Enhorabuena {nombre_jugador}!! Has ganado la partida!!")
+    #Aquí iría audio de ganar
     print("F̵I̵N̵ ̵D̵E̵L̵ ̵J̵U̵E̵G̵O̵")
 elif ganador=="maquina":
     print(f"Ups {nombre_jugador}, has perdido.")
+    #Aquí iría audio de perder
     print("F̵I̵N̵ ̵D̵E̵L̵ ̵J̵U̵E̵G̵O̵")
