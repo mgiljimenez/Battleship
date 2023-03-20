@@ -3,6 +3,7 @@ from battleship_config import usuario, maquina, mostrar_tablero
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
 from playsound import playsound
 
+
 #Inicializamos a los dos jugadores
 jugador_usuario=usuario(TAM_BARCOS,TAM_TABLERO,barco_icon)
 jugador_maquina=maquina(TAM_BARCOS,TAM_TABLERO, barco_icon)
@@ -12,7 +13,6 @@ tablero_del_jugador=jugador_usuario.generar_tablero("jugador")
 tablero_del_jugador_comprobar=jugador_usuario.generar_tablero("interactivo")
 tablero_maquina=jugador_maquina.generar_tablero("maquina")
 tablero_interactivo=jugador_maquina.generar_tablero("interactivo")
-
 
 #Iniciamos el juego preguntando al usuario su nombre y mostrando las instrucciones
 nombre_jugador=input("¿Cuál es tu nombre?   ")
@@ -56,7 +56,7 @@ while True:
     while True:
         #Este bucle se encarga del turno de la máquina
         sleep(3)
-        turno_maquina=disparo_de_maquina=jugador_maquina.disparar(tablero_del_jugador, tablero_del_jugador_comprobar)
+        turno_maquina=jugador_maquina.disparar(tablero_del_jugador, tablero_del_jugador_comprobar)
         if turno_maquina=="pierde_turno":
             #Si ha disparado en agua pierde el turno y toca al oponente
             with open ("img/agua.wav"):
