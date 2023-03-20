@@ -39,8 +39,8 @@ while True:
         turno_jugador=jugador_usuario.disparar(tablero_maquina,tablero_interactivo)
         if turno_jugador=="pierde_turno":
             #Si ha disparado en agua pierde el turno y toca al oponente
-            with open ("img/agua.mp3"):
-                playsound("img/agua.mp3")
+            with open ("img/agua.wav"):
+                playsound("img/agua.wav")
             break
         elif turno_jugador=="vuelve_tocar":
             #Si dispara donde ya había disparado antes, se vuelve arriba del bucle, no se considera jugada válida
@@ -63,8 +63,8 @@ while True:
         turno_maquina=disparo_de_maquina=jugador_maquina.disparar(tablero_del_jugador, tablero_del_jugador_comprobar)
         if turno_maquina=="pierde_turno":
             #Si ha disparado en agua pierde el turno y toca al oponente
-            with open ("img/agua.mp3"):
-                    playsound("img/agua.mp3")
+            with open ("img/agua.wav"):
+                playsound("img/agua.wav")
             break
         elif turno_maquina=="vuelve_tocar":
             #Si dispara donde ya había disparado antes, se vuelve arriba del bucle, no se considera jugada válida
