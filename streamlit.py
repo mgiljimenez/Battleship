@@ -29,10 +29,6 @@ class MostrarTablero:
         return(estilo)
 
 
-
-
-
-
 st.set_page_config(page_title="Battleship", page_icon="ship", layout="centered")
 
 st.sidebar.title("Battleship 🚢")
