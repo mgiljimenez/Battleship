@@ -3,10 +3,6 @@ from battleship_config import usuario, maquina, mostrar_tablero
 from battleship_variables import TAM_TABLERO, TAM_BARCOS,barco_icon,agua_icon,shoot_icon,instrucciones
 from playsound import playsound
 
-
-
-
-
 #Inicializamos a los dos jugadores
 jugador_usuario=usuario(TAM_BARCOS,TAM_TABLERO,barco_icon)
 jugador_maquina=maquina(TAM_BARCOS,TAM_TABLERO, barco_icon)
